@@ -12,9 +12,10 @@ from sqlalchemy.future import select
 from dotenv import load_dotenv
 import litellm
 from typing import List
+from pydantic import BaseModel
 
-from database import engine, Base, SessionLocal, get_db
-from models import Setting, ExecutionLog
+from backend.database import engine, Base, SessionLocal, get_db
+from backend.models import Setting, ExecutionLog
 
 load_dotenv()
 
@@ -36,6 +37,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Ensure the workspace dir exists before mounting it (lifespan runs after mounts).
+os.makedirs("workspace", exist_ok=True)
 app.mount("/workspace", StaticFiles(directory="workspace"), name="workspace")
 
 async def get_api_key(db: AsyncSession, key_name: str, env_fallback: str) -> str:
