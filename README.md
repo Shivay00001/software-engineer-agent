@@ -1,5 +1,7 @@
 # AI Software Engineer Agent
 
+Built by [VisionQuantech](https://visionquantech.com) — AI agents, apps & tools for small businesses.
+
 An autonomous coding agent that manages a local workspace, executes shell commands, and iteratively builds software.
 
 ## Overview
